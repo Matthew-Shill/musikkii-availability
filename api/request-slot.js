@@ -8,9 +8,7 @@ module.exports = async (req, res) => {
 
     const {
       studentName,
-      parentName,
       email,
-      phone,
       duration,
       requestedDate,
       requestedTime,
@@ -23,9 +21,7 @@ module.exports = async (req, res) => {
 
     console.log("NEW SLOT REQUEST", {
       studentName,
-      parentName,
       email,
-      phone,
       duration,
       requestedDate,
       requestedTime,
