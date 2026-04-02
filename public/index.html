@@ -69,42 +69,37 @@
     </section>
 
     <form id="request-form" class="request-form">
-      <div class="field-grid">
-        <div class="field">
-          <label for="studentName">Student name</label>
-          <input id="studentName" required />
-        </div>
+  <h3>Confirm Your Request</h3>
+  <p class="request-intro">
+    Enter the student name and email on file so we can match this request to your account.
+  </p>
 
-        <div class="field">
-          <label for="parentName">Parent/guardian name</label>
-          <input id="parentName" />
-        </div>
+  <div class="field-grid compact">
+    <div class="field">
+      <label for="studentName">Student Name</label>
+      <input id="studentName" required />
+    </div>
 
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" type="email" required />
-        </div>
+    <div class="field">
+      <label for="email">Email on File</label>
+      <input id="email" type="email" required />
+    </div>
+  </div>
 
-        <div class="field">
-          <label for="phone">Phone</label>
-          <input id="phone" />
-        </div>
-      </div>
+  <input id="requestedDate" type="hidden" />
+  <input id="requestedTime" type="hidden" />
+  <input id="requestedDuration" type="hidden" />
 
-      <input id="requestedDate" type="hidden" />
-      <input id="requestedTime" type="hidden" />
-      <input id="requestedDuration" type="hidden" />
+  <div class="field">
+    <label for="notes">Anything we should know? (optional)</label>
+    <textarea id="notes" rows="4"></textarea>
+  </div>
 
-      <div class="field">
-        <label for="notes">Anything you'd like us to know?</label>
-        <textarea id="notes" rows="4"></textarea>
-      </div>
-
-      <div class="request-actions">
-        <button class="submit-btn" type="submit">Request This Weekly Time</button>
-        <p id="form-status"></p>
-      </div>
-    </form>
+  <div class="request-actions">
+    <button class="submit-btn" type="submit">Request This Weekly Time</button>
+    <p id="form-status"></p>
+  </div>
+</form>
   </div>
 
   <script src="/booking.js"></script>
