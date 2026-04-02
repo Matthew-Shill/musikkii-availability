@@ -220,14 +220,13 @@ function updateSelectionCard() {
   }
 
   card.classList.remove("empty");
-  card.innerHTML = `
+    card.innerHTML = `
     <div class="selection-meta">
       <span class="meta-pill">👤 Matthew Shill</span>
       <span class="meta-pill">🕒 ${selectedTime} - ${formatEndTime(selectedTime, selectedDuration)}</span>
       <span class="meta-pill">🏷️ ${selectedDuration} min lesson</span>
-      <span class="meta-pill">🎥 Musikkii | Room 1</span>
+      <a class="meta-pill meta-link" href="https://www.musikkii.com/room1" target="_blank" rel="noopener noreferrer">🎥 Musikkii | Room 1</a>
     </div>
-    <div class="selection-availability">Free</div>
   `;
 }
 
