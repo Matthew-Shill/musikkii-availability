@@ -1,1 +1,8 @@
-
+{
+  "name": "musikkii-availability",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "node-ical": "^0.20.1"
+  }
+}
