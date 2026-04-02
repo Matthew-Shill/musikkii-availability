@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Your Weekly Lesson Time</title>
+  <link rel="stylesheet" href="/public/booking.css" />
+</head>
+<body>
+  <div class="booking-shell">
+    <h1>Choose Your Weekly Lesson Time</h1>
+    <p class="lead">Select your lesson length, then choose the weekly time you'd like to request.</p>
 
+    <div class="duration-picker">
+      <button type="button" class="active" data-duration-picker="30">30 min</button>
+      <button type="button" data-duration-picker="45">45 min</button>
+      <button type="button" data-duration-picker="60">60 min</button>
+    </div>
+
+    <div id="availability"></div>
+
+    <form id="request-form" class="request-form">
+      <div class="field">
+        <label for="studentName">Student name</label>
+        <input id="studentName" required />
+      </div>
+
+      <div class="field">
+        <label for="parentName">Parent/guardian name</label>
+        <input id="parentName" />
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" required />
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input id="phone" />
+      </div>
+
+      <input id="requestedDate" type="hidden" />
+      <input id="requestedTime" type="hidden" />
+      <input id="requestedDuration" type="hidden" />
+
+      <div class="field">
+        <label for="notes">Anything you'd like us to know?</label>
+        <textarea id="notes" rows="4"></textarea>
+      </div>
+
+      <button class="submit-btn" type="submit">Request This Weekly Time</button>
+      <p id="form-status"></p>
+    </form>
+  </div>
+
+  <script src="/public/booking.js"></script>
+</body>
+</html>
