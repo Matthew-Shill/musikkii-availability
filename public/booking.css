@@ -1,1 +1,120 @@
+body {
+  margin: 0;
+  font-family: "DM Sans", Arial, sans-serif;
+  background: #f7f9fc;
+  color: #111827;
+}
 
+.booking-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+p.lead {
+  margin-top: 0;
+  color: #4b5563;
+}
+
+.duration-picker {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0 24px;
+  flex-wrap: wrap;
+}
+
+.duration-picker button,
+.slot-btn,
+.submit-btn {
+  font: inherit;
+  border-radius: 14px;
+}
+
+.duration-picker button {
+  border: 1px solid #d6dce8;
+  background: white;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+.duration-picker button.active {
+  border-color: #0331bd;
+  box-shadow: 0 0 0 3px rgba(3, 49, 189, 0.12);
+}
+
+.day-card {
+  background: white;
+  border: 1px solid #e6ebf3;
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.day-card h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.slot-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.slot-btn {
+  border: 1px solid #d6dce8;
+  background: #fff;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.slot-btn.selected {
+  border-color: #0331bd;
+  box-shadow: 0 0 0 3px rgba(3, 49, 189, 0.12);
+}
+
+.request-form {
+  margin-top: 28px;
+  background: white;
+  border: 1px solid #e6ebf3;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.field {
+  margin-bottom: 12px;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d6dce8;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+}
+
+.submit-btn {
+  border: none;
+  background: #0331bd;
+  color: white;
+  padding: 14px 18px;
+  cursor: pointer;
+}
+
+#form-status {
+  margin-top: 12px;
+  color: #374151;
+}
