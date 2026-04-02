@@ -473,4 +473,30 @@ body {
   .selection-availability {
     font-size: 1.35rem;
   }
+
+  .hidden {
+  display: none;
+}
+
+.request-success {
+  margin-top: 20px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #f0f7ff;
+  border: 1px solid #cfe0ff;
+  box-shadow: 0 8px 24px rgba(3, 49, 189, 0.08);
+}
+
+.request-success h3 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  color: #0331bd;
+}
+
+.request-success p {
+  margin: 0 0 10px 0;
+  line-height: 1.6;
+  color: #1f2937;
+}
+  
 }
