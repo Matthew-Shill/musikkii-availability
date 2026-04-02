@@ -312,6 +312,15 @@ body {
   background: #fff;
 }
 
+.meta-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.meta-link:hover {
+  background: #eaf1ff;
+}
+
 .selection-card.empty {
   border: 1px dashed var(--line);
   color: var(--muted);
