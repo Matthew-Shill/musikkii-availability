@@ -8,39 +8,87 @@
 </head>
 <body>
   <div class="booking-shell">
-    <h1>Welcome to Musikkii</h1>
-    <h2>Choose Your Weekly Lesson Time</h2>
-    <p class="lead">Select your lesson length, then choose the weekly time you'd like to request.</p>
+    <div class="booking-header">
+      <h1>Welcome to Musikkii</h1>
+      <h2>Choose Your Weekly Lesson Time</h2>
+      <p class="lead">
+        Select your lesson length, then choose the weekly time you'd like to request.
+      </p>
+    </div>
 
-    <div class="duration-picker">
+    <div class="duration-picker" role="tablist" aria-label="Lesson length">
       <button type="button" class="active" data-duration-picker="30">30 min</button>
       <button type="button" data-duration-picker="45">45 min</button>
       <button type="button" data-duration-picker="60">60 min</button>
     </div>
 
-    <div id="availability-status"></div>
-    <div id="day-picker" class="day-picker"></div>
-    <div id="time-picker" class="time-picker"></div>
+    <p id="availability-status" class="availability-status"></p>
+
+    <section class="calendar-shell">
+      <div class="calendar-panel">
+        <div class="calendar-header">
+          <h3 id="calendar-month-label">Month Year</h3>
+          <div class="calendar-nav">
+            <button type="button" id="prev-month-btn" class="icon-btn" aria-label="Previous month">‹</button>
+            <button type="button" id="next-month-btn" class="icon-btn" aria-label="Next month">›</button>
+          </div>
+        </div>
+
+        <div class="calendar-weekdays">
+          <span>Sun</span>
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+        </div>
+
+        <div id="calendar-grid" class="calendar-grid"></div>
+
+        <div class="calendar-footer">
+          <span>(UTC-07:00) Mountain Time (US &amp; Canada)</span>
+        </div>
+      </div>
+
+      <aside class="times-panel">
+        <div class="times-panel-header">
+          <h3 id="selected-date-label">Select a date</h3>
+          <p id="selected-date-subtext">Choose a day with available openings.</p>
+        </div>
+
+        <div id="time-list" class="time-list"></div>
+      </aside>
+    </section>
+
+    <section class="selection-panel">
+      <h3>Available Option</h3>
+      <div id="selection-card" class="selection-card empty">
+        <p>Select a date and time to continue.</p>
+      </div>
+    </section>
 
     <form id="request-form" class="request-form">
-      <div class="field">
-        <label for="studentName">Student name</label>
-        <input id="studentName" required />
-      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="studentName">Student name</label>
+          <input id="studentName" required />
+        </div>
 
-      <div class="field">
-        <label for="parentName">Parent/guardian name</label>
-        <input id="parentName" />
-      </div>
+        <div class="field">
+          <label for="parentName">Parent/guardian name</label>
+          <input id="parentName" />
+        </div>
 
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" type="email" required />
-      </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" required />
+        </div>
 
-      <div class="field">
-        <label for="phone">Phone</label>
-        <input id="phone" />
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" />
+        </div>
       </div>
 
       <input id="requestedDate" type="hidden" />
@@ -52,8 +100,10 @@
         <textarea id="notes" rows="4"></textarea>
       </div>
 
-      <button class="submit-btn" type="submit">Request This Weekly Time</button>
-      <p id="form-status"></p>
+      <div class="request-actions">
+        <button class="submit-btn" type="submit">Request This Weekly Time</button>
+        <p id="form-status"></p>
+      </div>
     </form>
   </div>
 
