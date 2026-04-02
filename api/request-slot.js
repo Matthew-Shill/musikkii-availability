@@ -19,21 +19,49 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: "Missing required fields." });
     }
 
-    console.log("NEW SLOT REQUEST", {
+    const payload = {
       studentName,
       email,
       duration,
       requestedDate,
       requestedTime,
-      notes
+      notes: notes || "",
+      submittedAt: new Date().toISOString()
+    };
+
+    console.log("NEW SLOT REQUEST", payload);
+
+    const webhookUrl = process.env.ZAPIER_SCHEDULE_REQUEST_WEBHOOK;
+
+    if (!webhookUrl) {
+      return res.status(500).json({
+        error: "Missing Zapier webhook environment variable."
+      });
+    }
+
+    const zapRes = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
     });
+
+    if (!zapRes.ok) {
+      const errorText = await zapRes.text();
+      console.error("Zapier webhook failed:", errorText);
+
+      return res.status(500).json({
+        error: "Failed to send request notification."
+      });
+    }
 
     return res.status(200).json({
       ok: true,
       message: "Request received. We’ll confirm your weekly lesson time shortly."
     });
   } catch (err) {
-    console.error(err);
+    console.error("request-slot error:", err);
     return res.status(500).json({ error: "Failed to submit request." });
   }
 };
