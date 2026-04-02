@@ -307,11 +307,9 @@ function bindStaticEvents() {
       return;
     }
 
-    const payload = {
+        const payload = {
       studentName: document.getElementById("studentName").value,
-      parentName: document.getElementById("parentName").value,
       email: document.getElementById("email").value,
-      phone: document.getElementById("phone").value,
       duration: requestedDuration,
       requestedDate,
       requestedTime,
