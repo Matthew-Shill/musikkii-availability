@@ -25,42 +25,44 @@ body {
 }
 
 .booking-shell {
-  max-width: 1320px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 28px 18px 48px;
+  padding: 20px 14px 36px;
 }
 
 .booking-header h1 {
-  margin: 0 0 10px;
-  font-size: clamp(2rem, 4vw, 3.4rem);
+  margin: 0 0 8px;
+  font-size: clamp(1.75rem, 3vw, 2.7rem);
   line-height: 1.05;
 }
 
 .booking-header h2 {
-  margin: 0 0 14px;
-  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  margin: 0 0 12px;
+  font-size: clamp(1.3rem, 2.3vw, 1.85rem);
   line-height: 1.15;
 }
 
 .lead {
-  margin: 0 0 24px;
+  margin: 0 0 18px;
   color: var(--muted);
-  font-size: 1.05rem;
+  font-size: 0.98rem;
 }
 
 .duration-picker {
   display: flex;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
-.duration-picker button,
-.icon-btn,
-.time-btn,
-.submit-btn,
-.calendar-day {
-  font: inherit;
+.duration-picker button {
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: 0.18s ease;
 }
 
 .duration-picker button {
@@ -86,17 +88,17 @@ body {
 
 .calendar-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 290px;
+  grid-template-columns: minmax(0, 1fr) 240px;
   gap: 0;
   border: 1px solid var(--line);
-  border-radius: 28px;
+  border-radius: 22px;
   background: var(--card);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
 
 .calendar-panel {
-  padding: 18px 18px 0;
+  padding: 14px 14px 0;
   border-right: 1px solid var(--line);
 }
 
@@ -104,15 +106,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 6px 18px;
+  padding: 4px 4px 12px;
 }
 
 .calendar-header h3 {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 1.35rem;
   color: var(--brand);
 }
-
 .calendar-nav {
   display: flex;
   gap: 10px;
@@ -137,10 +138,10 @@ body {
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 12px;
-  padding: 0 6px 10px;
+  gap: 8px;
+  padding: 0 4px 8px;
   color: #3d4658;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
 }
 
 .calendar-weekdays span {
@@ -150,16 +151,16 @@ body {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 12px;
-  padding: 0 6px 18px;
+  gap: 8px;
+  padding: 0 4px 14px;
 }
 
 .calendar-day {
-  min-height: 84px;
+  min-height: 64px;
   border: 1px solid transparent;
-  border-radius: 18px;
+  border-radius: 14px;
   background: transparent;
-  padding: 10px 6px 8px;
+  padding: 6px 4px 4px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -192,8 +193,8 @@ body {
 }
 
 .calendar-day.selected .day-number {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
   background: var(--brand);
   color: #fff;
@@ -203,29 +204,30 @@ body {
 }
 
 .day-number {
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1;
-  min-width: 36px;
-  min-height: 36px;
+  min-width: 30px;
+  min-height: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .day-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 999px;
   background: var(--brand);
-  margin-top: 10px;
+  margin-top: 7px;
 }
 
 .calendar-footer {
   border-top: 1px solid var(--line);
-  padding: 14px 8px 16px;
+  padding: 10px 8px 12px;
   text-align: center;
   color: #2e3748;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .times-panel {
@@ -236,27 +238,27 @@ body {
 }
 
 .times-panel-header {
-  padding: 22px 20px 12px;
+  padding: 16px 16px 10px;
   border-bottom: 1px solid var(--line-soft);
 }
 
 .times-panel-header h3 {
-  margin: 0 0 6px;
-  font-size: 1.3rem;
+  margin: 0 0 4px;
+  font-size: 1.08rem;
 }
 
 .times-panel-header p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.96rem;
+  font-size: 0.9rem;
 }
 
 .time-list {
-  padding: 18px 18px 24px;
+  padding: 14px 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-height: 690px;
+  gap: 8px;
+  max-height: 520px;
   overflow-y: auto;
 }
 
@@ -265,10 +267,10 @@ body {
   background: transparent;
   color: var(--text);
   border-radius: 999px;
-  padding: 12px 16px;
+  padding: 9px 12px;
   text-align: center;
   cursor: pointer;
-  font-size: 1.15rem;
+  font-size: 1rem;
   transition: 0.18s ease;
 }
 
@@ -288,15 +290,15 @@ body {
 
 .selection-panel,
 .request-form {
-  margin-top: 22px;
+  margin-top: 18px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 28px;
+  border-radius: 22px;
   box-shadow: var(--shadow-soft);
 }
 
 .selection-panel {
-  padding: 22px;
+  padding: 18px;
 }
 
 .selection-panel h3 {
@@ -343,7 +345,7 @@ body {
 }
 
 .request-form {
-  padding: 22px;
+  padding: 18px;
 }
 
 .field-grid {
