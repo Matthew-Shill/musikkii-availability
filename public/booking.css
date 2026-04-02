@@ -50,19 +50,17 @@ body {
 
 .duration-picker {
   display: flex;
-  gap: 10px;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
-.duration-picker button {
-  border: 1px solid var(--line);
-  background: var(--card);
-  color: var(--text);
-  border-radius: 16px;
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: 0.18s ease;
+.duration-picker button,
+.icon-btn,
+.time-btn,
+.submit-btn,
+.calendar-day {
+  font: inherit;
 }
 
 .duration-picker button {
