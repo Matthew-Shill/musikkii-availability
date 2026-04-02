@@ -153,6 +153,29 @@ body {
   padding: 0 4px 14px;
 }
 
+.request-form h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.request-intro {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.field-grid.compact {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .field-grid.compact {
+    grid-template-columns: 1fr;
+  }
+}
+
 .calendar-day {
   min-height: 64px;
   border: 1px solid transparent;
