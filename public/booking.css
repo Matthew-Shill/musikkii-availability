@@ -118,3 +118,70 @@ p.lead {
   margin-top: 12px;
   color: #374151;
 }
+
+#availability-status {
+  margin: 8px 0 18px;
+  color: #374151;
+}
+
+.day-picker {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+.day-btn {
+  min-width: 110px;
+  border: 1px solid #d6dce8;
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.day-btn.selected {
+  border-color: #0331bd;
+  box-shadow: 0 0 0 3px rgba(3, 49, 189, 0.12);
+}
+
+.day-btn-top {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.day-btn-bottom {
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.time-picker {
+  background: #fff;
+  border: 1px solid #e6ebf3;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.time-picker-header h3 {
+  margin: 0 0 6px;
+}
+
+.time-picker-header p {
+  margin: 0 0 16px;
+  color: #4b5563;
+}
+
+.time-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
