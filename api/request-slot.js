@@ -25,19 +25,20 @@ module.exports = async (req, res) => {
     }
 
     const payload = {
-      studentName,
-      email,
-      duration,
-      requestedDate,
-      requestedTime,
-      requestedTimeZone: requestedTimeZone || "America/Denver",
-      requestedStartUtc,
-      requestedEndUtc: requestedEndUtc || "",
-      studioDate: studioDate || "",
-      studioTime: studioTime || "",
-      notes: notes || "",
-      submittedAt: new Date().toISOString()
-    };
+  studentName,
+  email,
+  duration,
+  requestedDate,
+  requestedTime,
+  requestedTimeZone: requestedTimeZone || "America/Denver",
+  requestedTimeDisplay: requestedTimeDisplay || requestedTime,
+  requestedStartUtc,
+  requestedEndUtc: requestedEndUtc || "",
+  studioDate: studioDate || "",
+  studioTime: studioTime || "",
+  notes: notes || "",
+  submittedAt: new Date().toISOString()
+};
 
     console.log("NEW SLOT REQUEST", payload);
 
