@@ -602,6 +602,7 @@ function bindStaticEvents() {
       requestedDate,
       requestedTime,
       requestedTimeZone,
+      requestedTimeDisplay: `${requestedTime} (${getTimeZoneShortLabel(requestedTimeZone)})`,
       requestedStartUtc,
       requestedEndUtc,
       studioDate,
