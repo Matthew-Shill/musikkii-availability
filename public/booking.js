@@ -5,19 +5,36 @@ let selectedDate = "";
 let selectedTime = "";
 let currentMonthDate = null;
 let isSubmitting = false;
-let selectedTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Denver";
 
 const STUDIO_TIME_ZONE = "America/Denver";
-const FALLBACK_TIME_ZONES = [
-  "America/Los_Angeles",
-  "America/Denver",
-  "America/Chicago",
-  "America/New_York",
-  "Europe/London",
-  "Europe/Paris",
-  "Asia/Tokyo",
-  "Australia/Sydney"
+const TIME_ZONE_OPTIONS = [
+  { value: "America/New_York", label: "Eastern Time (ET)", short: "ET" },
+  { value: "America/Chicago", label: "Central Time (CT)", short: "CT" },
+  { value: "America/Denver", label: "Mountain Time (MT)", short: "MT" },
+  { value: "America/Los_Angeles", label: "Pacific Time (PT)", short: "PT" },
+  { value: "America/Anchorage", label: "Alaska Time (AKT)", short: "AKT" },
+  { value: "Pacific/Honolulu", label: "Hawaii Time (HT)", short: "HT" }
 ];
+
+let selectedTimeZone = detectInitialTimeZone();
+
+function detectInitialTimeZone() {
+  const browserZone = Intl.DateTimeFormat().resolvedOptions().timeZone || STUDIO_TIME_ZONE;
+  const matched = TIME_ZONE_OPTIONS.find(zone => zone.value === browserZone);
+  return matched ? matched.value : STUDIO_TIME_ZONE;
+}
+
+function getTimeZoneOption(timeZone) {
+  return TIME_ZONE_OPTIONS.find(zone => zone.value === timeZone) || TIME_ZONE_OPTIONS.find(zone => zone.value === STUDIO_TIME_ZONE);
+}
+
+function getTimeZoneLabel(timeZone) {
+  return getTimeZoneOption(timeZone)?.label || "Mountain Time (MT)";
+}
+
+function getTimeZoneShortLabel(timeZone) {
+  return getTimeZoneOption(timeZone)?.short || "MT";
+}
 
 function pad2(value) {
   return String(value).padStart(2, "0");
@@ -98,17 +115,6 @@ function formatTimeRangeInTimeZone(startUtc, endUtc, timeZone) {
   });
 
   return `${formatter.format(start)} - ${formatter.format(end)}`;
-}
-
-function getTimeZoneShortName(dateLike, timeZone) {
-  const date = new Date(dateLike);
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone,
-    timeZoneName: "short"
-  }).formatToParts(date);
-
-  const timeZonePart = parts.find(part => part.type === "timeZoneName");
-  return timeZonePart ? timeZonePart.value : timeZone;
 }
 
 function buildSlotsMap(slots, timeZone) {
@@ -255,7 +261,7 @@ function renderTimeList() {
   }
 
   label.textContent = formatSelectedDateLabel(selectedDate);
-  subtext.textContent = `Times shown in ${selectedTimeZone}.`;
+  subtext.textContent = `Times shown in ${getTimeZoneLabel(selectedTimeZone)}.`;
 
   const daySlots = slotsByDate.get(selectedDate) || [];
 
@@ -312,16 +318,14 @@ function updateSelectionCard() {
   }
 
   const localDisplay = formatTimeRangeInTimeZone(slot.startUtc, slot.endUtc, selectedTimeZone);
-  const localZone = getTimeZoneShortName(slot.startUtc, selectedTimeZone);
   const studioDisplay = formatTimeRangeInTimeZone(slot.startUtc, slot.endUtc, STUDIO_TIME_ZONE);
-  const studioZone = getTimeZoneShortName(slot.startUtc, STUDIO_TIME_ZONE);
 
   card.classList.remove("empty");
   card.innerHTML = `
     <div class="selection-meta">
       <span class="meta-pill">👤 Matthew Shill</span>
-      <span class="meta-pill">🕒 ${localDisplay} ${localZone}</span>
-      <span class="meta-pill">🏔️ ${studioDisplay} ${studioZone}</span>
+      <span class="meta-pill">🕒 ${localDisplay} ${getTimeZoneShortLabel(selectedTimeZone)}</span>
+      <span class="meta-pill">🏔️ ${studioDisplay} ${getTimeZoneShortLabel(STUDIO_TIME_ZONE)}</span>
       <span class="meta-pill">🏷️ ${selectedDuration} min lesson</span>
       <a class="meta-pill meta-link" href="https://www.musikkii.com/room1" target="_blank" rel="noopener noreferrer">🎥 Musikkii | Room 1</a>
     </div>
@@ -404,20 +408,9 @@ function populateTimeZoneSelect() {
   const select = document.getElementById("timezone-select");
   if (!select) return;
 
-  let zones = [];
-  if (typeof Intl.supportedValuesOf === "function") {
-    zones = Intl.supportedValuesOf("timeZone");
-  } else {
-    zones = [...FALLBACK_TIME_ZONES];
-  }
-
-  if (!zones.includes(selectedTimeZone)) {
-    zones.unshift(selectedTimeZone);
-  }
-
-  select.innerHTML = zones.map(zone => {
-    const isSelected = zone === selectedTimeZone ? "selected" : "";
-    return `<option value="${zone}" ${isSelected}>${zone}</option>`;
+  select.innerHTML = TIME_ZONE_OPTIONS.map(zone => {
+    const isSelected = zone.value === selectedTimeZone ? "selected" : "";
+    return `<option value="${zone.value}" ${isSelected}>${zone.label}</option>`;
   }).join("");
 
   const requestedTimeZoneInput = document.getElementById("requestedTimeZone");
@@ -467,7 +460,7 @@ function applyPrefillFromQueryParams() {
     if (input) input.value = email;
   }
 
-  if (timezone) {
+  if (timezone && TIME_ZONE_OPTIONS.some(zone => zone.value === timezone)) {
     selectedTimeZone = timezone;
   }
 
@@ -651,9 +644,9 @@ function bindStaticEvents() {
       showSuccessModal({
         studentName,
         requestedDate,
-        requestedTime: `${requestedTime} (${getTimeZoneShortName(requestedStartUtc, requestedTimeZone)})`,
+        requestedTime: `${requestedTime} (${getTimeZoneShortLabel(requestedTimeZone)})`,
         requestedDuration,
-        studioTime: `${studioTime} (${getTimeZoneShortName(requestedStartUtc, STUDIO_TIME_ZONE)})`
+        studioTime: `${studioTime} (${getTimeZoneShortLabel(STUDIO_TIME_ZONE)})`
       });
 
       form.reset();
