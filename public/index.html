@@ -1,107 +1,412 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Choose Your Weekly Lesson Time</title>
-  <link rel="stylesheet" href="/booking.css" />
-</head>
-<body>
-  <div class="booking-shell">
-    <div class="booking-header">
-      <p class="lead">
-        Select your lesson length, then choose the weekly time you'd like to request.
-      </p>
+<style>
+  .lesson-request-app {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 32px 20px 48px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f2937;
+  }
+
+  .lesson-request-app * {
+    box-sizing: border-box;
+  }
+
+  .lesson-request-app .app-header {
+    margin-bottom: 24px;
+  }
+
+  .lesson-request-app .app-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 34px;
+    line-height: 1.15;
+    color: #111827;
+  }
+
+  .lesson-request-app .app-header p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #4b5563;
+  }
+
+  .lesson-request-app .top-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .lesson-request-app .control-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .lesson-request-app .control-label {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+  }
+
+  .lesson-request-app .duration-pickers {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .lesson-request-app .duration-pickers button,
+  .lesson-request-app .month-nav button,
+  .lesson-request-app .time-btn,
+  .lesson-request-app .submit-btn,
+  .lesson-request-app select,
+  .lesson-request-app input,
+  .lesson-request-app textarea {
+    font: inherit;
+  }
+
+  .lesson-request-app .duration-pickers button {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #111827;
+    border-radius: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .lesson-request-app .duration-pickers button.active {
+    background: #0331bd;
+    color: #fff;
+    border-color: #0331bd;
+  }
+
+  .lesson-request-app select,
+  .lesson-request-app input,
+  .lesson-request-app textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    padding: 12px 14px;
+    background: #fff;
+  }
+
+  .lesson-request-app textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .lesson-request-app .availability-status {
+    margin-bottom: 16px;
+    color: #b45309;
+    font-weight: 600;
+  }
+
+  .lesson-request-app .app-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, 420px);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .lesson-request-app .panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 32px rgba(2, 6, 23, 0.05);
+  }
+
+  .lesson-request-app .month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .lesson-request-app .month-nav button {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .lesson-request-app #calendar-month-label {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .lesson-request-app .weekday-row,
+  .lesson-request-app .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .lesson-request-app .weekday-row {
+    margin-bottom: 10px;
+  }
+
+  .lesson-request-app .weekday-row span {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .lesson-request-app .calendar-day {
+    min-height: 62px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+    position: relative;
+    padding: 10px 8px;
+  }
+
+  .lesson-request-app .calendar-day.outside {
+    opacity: 0.38;
+  }
+
+  .lesson-request-app .calendar-day.disabled {
+    cursor: not-allowed;
+    background: #f9fafb;
+  }
+
+  .lesson-request-app .calendar-day.has-slots {
+    border-color: #bfd0ff;
+  }
+
+  .lesson-request-app .calendar-day.selected {
+    border-color: #0331bd;
+    background: #eff6ff;
+  }
+
+  .lesson-request-app .day-number {
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .lesson-request-app .day-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #0331bd;
+    display: block;
+    margin: 8px auto 0;
+  }
+
+  .lesson-request-app .time-panel h3,
+  .lesson-request-app .form-panel h3 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+    color: #111827;
+  }
+
+  .lesson-request-app .time-panel p,
+  .lesson-request-app .form-panel p {
+    margin: 0 0 14px 0;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .lesson-request-app .time-list {
+    display: grid;
+    gap: 10px;
+    max-height: 360px;
+    overflow: auto;
+    padding-right: 4px;
+  }
+
+  .lesson-request-app .time-btn {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .lesson-request-app .time-btn.selected {
+    border-color: #0331bd;
+    background: #eff6ff;
+    color: #0331bd;
+  }
+
+  .lesson-request-app .empty-times {
+    margin: 0;
+    color: #6b7280;
+  }
+
+  .lesson-request-app .selection-card {
+    margin: 18px 0 0;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px dashed #cbd5e1;
+    background: #f8fafc;
+  }
+
+  .lesson-request-app .selection-card.empty p {
+    margin: 0;
+    color: #64748b;
+  }
+
+  .lesson-request-app .selection-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lesson-request-app .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .lesson-request-app .meta-link {
+    color: #0331bd;
+    text-decoration: none;
+  }
+
+  .lesson-request-app .form-grid {
+    display: grid;
+    gap: 14px;
+  }
+
+  .lesson-request-app .submit-btn {
+    border: none;
+    border-radius: 14px;
+    background: #0331bd;
+    color: #fff;
+    padding: 14px 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .lesson-request-app .submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .lesson-request-app .form-status {
+    margin-top: 12px;
+    color: #374151;
+    font-weight: 600;
+    min-height: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .lesson-request-app .app-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section id="schedule-request" class="lesson-request-app">
+  <div class="app-header">
+    <h2>Request Your Weekly Lesson Time</h2>
+    <p>
+      Choose your lesson length, select your time zone, then pick an available weekly time.
+      Availability is generated from Matthew’s Mountain Time teaching schedule.
+    </p>
+  </div>
+
+  <div class="top-controls">
+    <div class="control-block">
+      <div class="control-label">Lesson Length</div>
+      <div class="duration-pickers">
+        <button type="button" class="active" data-duration-picker="30">30 min</button>
+        <button type="button" data-duration-picker="45">45 min</button>
+        <button type="button" data-duration-picker="60">60 min</button>
+      </div>
     </div>
 
-    <div class="duration-picker" role="tablist" aria-label="Lesson length">
-      <button type="button" class="active" data-duration-picker="30">30 min</button>
-      <button type="button" data-duration-picker="45">45 min</button>
-      <button type="button" data-duration-picker="60">60 min</button>
+    <div class="control-block" style="min-width:280px;">
+      <label class="control-label" for="timezone-select">Your Time Zone</label>
+      <select id="timezone-select"></select>
     </div>
+  </div>
 
-    <p id="availability-status" class="availability-status"></p>
+  <div id="availability-status" class="availability-status"></div>
 
-    <section class="calendar-shell">
-      <div class="calendar-panel">
-        <div class="calendar-header">
-          <h3 id="calendar-month-label">Month Year</h3>
-          <div class="calendar-nav">
-            <button type="button" id="prev-month-btn" class="icon-btn" aria-label="Previous month">‹</button>
-            <button type="button" id="next-month-btn" class="icon-btn" aria-label="Next month">›</button>
-          </div>
-        </div>
-
-        <div class="calendar-weekdays">
-          <span>Sun</span>
-          <span>Mon</span>
-          <span>Tue</span>
-          <span>Wed</span>
-          <span>Thu</span>
-          <span>Fri</span>
-          <span>Sat</span>
-        </div>
-
-        <div id="calendar-grid" class="calendar-grid"></div>
-
-        <div class="calendar-footer">
-          <span>(UTC-07:00) Mountain Time (US &amp; Canada)</span>
-        </div>
+  <div class="app-grid">
+    <div class="panel">
+      <div class="month-nav">
+        <button type="button" id="prev-month-btn" aria-label="Previous month">‹</button>
+        <h3 id="calendar-month-label">Loading...</h3>
+        <button type="button" id="next-month-btn" aria-label="Next month">›</button>
       </div>
 
-      <aside class="times-panel">
-        <div class="times-panel-header">
-          <h3 id="selected-date-label">Select a date</h3>
-          <p id="selected-date-subtext">Choose a day with available openings.</p>
-        </div>
+      <div class="weekday-row">
+        <span>Sun</span>
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+      </div>
 
+      <div id="calendar-grid" class="calendar-grid"></div>
+
+      <div class="panel time-panel" style="margin-top:18px; padding:18px;">
+        <h3 id="selected-date-label">Select a date</h3>
+        <p id="selected-date-subtext">Choose a day with available openings.</p>
         <div id="time-list" class="time-list"></div>
-      </aside>
-    </section>
+      </div>
 
-    <section class="selection-panel">
-      <h3>Available Option</h3>
       <div id="selection-card" class="selection-card empty">
         <p>Select a date and time to continue.</p>
       </div>
-    </section>
-    
-    <div id="request-success" class="request-success hidden"></div>
-
-    <form id="request-form" class="request-form">
-  <h3>Confirm Your Request</h3>
-  <p class="request-intro">
-    Enter the student name and email on file so we can match this request to your account.
-  </p>
-
-  <div class="field-grid compact">
-    <div class="field">
-      <label for="studentName">Student Name</label>
-      <input id="studentName" required />
     </div>
 
-    <div class="field">
-      <label for="email">Email on File</label>
-      <input id="email" type="email" required />
+    <div class="panel form-panel">
+      <h3>Submit Your Request</h3>
+      <p>
+        Once submitted, your request will be reviewed manually and confirmed by email.
+      </p>
+
+      <form id="request-form" class="form-grid">
+        <input type="text" id="studentName" name="studentName" placeholder="Student name" required>
+        <input type="email" id="email" name="email" placeholder="Email address" required>
+        <textarea id="notes" name="notes" placeholder="Anything we should know? Optional."></textarea>
+
+        <input type="hidden" id="requestedDate" name="requestedDate">
+        <input type="hidden" id="requestedTime" name="requestedTime">
+        <input type="hidden" id="requestedDuration" name="requestedDuration">
+        <input type="hidden" id="requestedTimeZone" name="requestedTimeZone">
+        <input type="hidden" id="requestedStartUtc" name="requestedStartUtc">
+        <input type="hidden" id="requestedEndUtc" name="requestedEndUtc">
+        <input type="hidden" id="studioDate" name="studioDate">
+        <input type="hidden" id="studioTime" name="studioTime">
+
+        <button type="submit" class="submit-btn">Submit Request</button>
+        <div id="form-status" class="form-status"></div>
+      </form>
     </div>
   </div>
+</section>
 
-  <input id="requestedDate" type="hidden" />
-  <input id="requestedTime" type="hidden" />
-  <input id="requestedDuration" type="hidden" />
-
-  <div class="field">
-    <label for="notes">Anything we should know? (optional)</label>
-    <textarea id="notes" rows="4"></textarea>
-  </div>
-
-  <div class="request-actions">
-    <button class="submit-btn" type="submit">Request This Weekly Time</button>
-    <p id="form-status"></p>
-  </div>
-</form>
-  </div>
-
-  <script src="/booking.js"></script>
-</body>
-</html>
+<script src="/booking.js" defer></script>
