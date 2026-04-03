@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
       requestedDate,
       requestedTime,
       requestedTimeZone,
+      requestedTimeDisplay,
       requestedStartUtc,
       requestedEndUtc,
       studioDate,
