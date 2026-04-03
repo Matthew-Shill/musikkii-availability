@@ -360,7 +360,7 @@ function showSuccessModal({ studentName, requestedDate, requestedTime, requested
   modal.style.borderRadius = "18px";
   modal.style.boxShadow = "0 20px 60px rgba(15, 23, 42, 0.25)";
   modal.style.padding = "28px 24px";
-  modal.style.fontFamily = "inherit";
+  modal.style.fontFamily = "Arial, Helvetica, sans-serif";
   modal.style.color = "#1f2937";
 
   modal.innerHTML = `
