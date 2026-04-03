@@ -325,7 +325,6 @@ function updateSelectionCard() {
     <div class="selection-meta">
       <span class="meta-pill">👤 Matthew Shill</span>
       <span class="meta-pill">🕒 ${localDisplay} ${getTimeZoneShortLabel(selectedTimeZone)}</span>
-      <span class="meta-pill">🏔️ ${studioDisplay} ${getTimeZoneShortLabel(STUDIO_TIME_ZONE)}</span>
       <span class="meta-pill">🏷️ ${selectedDuration} min lesson</span>
       <a class="meta-pill meta-link" href="https://www.musikkii.com/room1" target="_blank" rel="noopener noreferrer">🎥 Musikkii | Room 1</a>
     </div>
