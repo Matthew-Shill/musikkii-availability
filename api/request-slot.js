@@ -12,10 +12,15 @@ module.exports = async (req, res) => {
       duration,
       requestedDate,
       requestedTime,
+      requestedTimeZone,
+      requestedStartUtc,
+      requestedEndUtc,
+      studioDate,
+      studioTime,
       notes
     } = body || {};
 
-    if (!studentName || !email || !duration || !requestedDate || !requestedTime) {
+    if (!studentName || !email || !duration || !requestedDate || !requestedTime || !requestedStartUtc) {
       return res.status(400).json({ error: "Missing required fields." });
     }
 
@@ -25,6 +30,11 @@ module.exports = async (req, res) => {
       duration,
       requestedDate,
       requestedTime,
+      requestedTimeZone: requestedTimeZone || "America/Denver",
+      requestedStartUtc,
+      requestedEndUtc: requestedEndUtc || "",
+      studioDate: studioDate || "",
+      studioTime: studioTime || "",
       notes: notes || "",
       submittedAt: new Date().toISOString()
     };
@@ -50,7 +60,6 @@ module.exports = async (req, res) => {
     if (!zapRes.ok) {
       const errorText = await zapRes.text();
       console.error("Zapier webhook failed:", errorText);
-
       return res.status(500).json({
         error: "Failed to send request notification."
       });
